@@ -1,5 +1,5 @@
 #TIME LOG:
-#### Load the data ####
+
 library(data.table)
 library(openxlsx)
 library(reshape2)
@@ -14,16 +14,9 @@ library(tidyr)
 library(vegan)
 library(purrr)
 library(egg)
+library(tidyverse)
 
-
-
-#old path = "C:/Users/di58lag/Documents/scratchboard/Scratchboard/MorK/questioner_time_measurments.xlsx"
-setwd("F:/TammyA/")
-# Reads the data
-data = read.csv("F:/TammyA/data_30_9.csv", quote = "", 
-                row.names = NULL, 
-                stringsAsFactors = FALSE)
-
+#### Load the data ####
 data = fread("data_30_9.csv")
 
 # Quality Control:
@@ -37,19 +30,6 @@ datan = data[,numerical]
 summary(data[,numerical])
 data$grou
 
-ggplot(data, aes(x = data$Out_emp_hum3_totalMean)) +   geom_histogram() +   facet_grid(Group_T2 ~ .) 
-
-data.group.1 = data %>% filter (Group_T2 == 1)
-data.group.2 = data %>% filter (Group_T2 == 2)
-dim(data.group.2)
-
-?wilcox.test
-wilcox.test(data.group.1$Out_em_per3_totalMean, data.group.2$Out_emp_hum3_totalMean)
-wilcox.test.default(data.group.1$Out_em_per3_totalMean, data.group.2$Out_emp_hum3_totalMean)
-
-shapiro.test((data.group.2$Out_em_per3_totalMean))
-
-t.test((data.group.1$Out_em_per3_totalMean, data.group.2$Out_emp_hum3_totalMean))
 
 #### Choosing the right variables ####
 variable.names.full  = read.xlsx("variables2.xlsx")
@@ -67,8 +47,25 @@ dim(X.Data)
 dim(data)
 
 
-ggplo
+
 #### Comparison of Averages ####
+
+ggplot(data, aes(x = data$Out_emp_hum3_totalMean)) +   geom_histogram() +   facet_grid(Group_T2 ~ .) 
+
+data.group.1 = data %>% filter (Group_T2 == 1)
+data.group.2 = data %>% filter (Group_T2 == 2)
+dim(data.group.2)
+
+?wilcox.test
+wilcox.test(data.group.1$Out_em_per3_totalMean, data.group.2$Out_emp_hum3_totalMean)
+wilcox.test.default(data.group.1$Out_em_per3_totalMean, data.group.2$Out_emp_hum3_totalMean)
+
+shapiro.test((data.group.2$Out_em_per3_totalMean))
+
+t.test((data.group.1$Out_em_per3_totalMean, data.group.2$Out_emp_hum3_totalMean))
+
+
+
 # First you must check normality: 
 
 
