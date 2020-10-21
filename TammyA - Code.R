@@ -46,6 +46,11 @@ Y.Data = data %>% select(as.character(Y.variable.names))
 dim(X.Data)
 dim(data)
 
+plot(data$Self_re_SBCA.T1_1, data$covid_19_general_3)
+
+png("testplot.png")
+plot(data$Self_re_SBCA.T1_1, data$covid_19_general_3)
+dev.off()
 
 
 #### Comparison of Averages ####
